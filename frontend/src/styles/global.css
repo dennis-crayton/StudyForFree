@@ -1,0 +1,74 @@
+* {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0d0f18;
+    color: #e5e5e5;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue";
+}
+
+.container {
+    max-width:900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: #161925;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255,255,255, 0.05);
+    transition: 0.2s ease;
+}
+.card:hover {
+  background-color: #1e2130;
+  transform: translateY(-2px);
+}
+
+/* Buttons */
+button, .btn {
+  background-color: #343853;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  
+}
+
+button:hover, .btn:hover {
+  background-color: #4a4f70;
+}
+
+/* Links */
+a {
+  color: #72a7ff;
+  text-decoration: none;
+  
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Page titles */
+.page-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Flashcards */
+.flashcard {
+  background-color: #1a1d2b;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+}
+
