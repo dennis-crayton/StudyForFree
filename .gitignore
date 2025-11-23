@@ -17,6 +17,7 @@ obj/
 *.snupkg
 **/Properties/launchSettings.json
 .vs/
+**/appsettings.json
 **/appsettings.Development.json
 **/appsettings.Local.json
 
