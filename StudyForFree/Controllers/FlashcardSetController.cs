@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudyForFree.Data;
 using StudyForFree.Entities;
 using StudyForFree.Entities.DTOs;
+using System.Security.Claims;
 
 namespace StudyForFree.Controllers
 {
@@ -17,10 +20,16 @@ namespace StudyForFree.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllSets()
         {
-            var sets = await _context.FlashcardSets.Select(x => new FlashcardSetGetDTO
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized(new { Message = "User not authenticated." });
+            }
+            var sets = await _context.FlashcardSets.Where(s => s.UserId == userId).Select(x => new FlashcardSetGetDTO
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -61,15 +70,21 @@ namespace StudyForFree.Controllers
             }).SingleOrDefaultAsync();
             return Ok(sets);
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateSet([FromBody] FlashcardSetCreateDTO dto)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized(new { Message = "User not authenticated." });
+            }
             var newSet = new FlashcardSet
             {
                 Title = dto.Title,
                 Description = dto.Description,
                 IsPublic = dto.IsPublic,
+                UserId = userId,
                 CreatedAt = DateTime.UtcNow,
             };
             _context.FlashcardSets.Add(newSet);

@@ -1,7 +1,12 @@
 const API_BASE = "";
 
 export async function getFlashcardSets() {
-    const response = await fetch(`${API_BASE}/api/FlashcardSet`);
+    const token = localStorage.getItem('accessToken');
+    const response = await fetch(`${API_BASE}/api/FlashcardSet`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
     if (!response.ok) {
         throw new Error('Failed to fetch flashcard sets');
     }
@@ -16,12 +21,18 @@ export async function getFlashcardSetById(id) {
 }
 
 export async function createFlashcardSet(set) {
+    const token = localStorage.getItem('accessToken');
     const response = await fetch(`${API_BASE}/api/FlashcardSet`,{
         method: 'POST',
-        headers: 
-        {'Content-Type' : 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(set)
     });
+    if (!response.ok) {
+        throw new Error('Failed to create flashcard set');
+    }
     return response.json();
 
 }
@@ -33,6 +44,9 @@ export async function updateFlashcardSet(id,updatedSet) {
         {'Content-Type' : 'application/json'},
         body: JSON.stringify(updatedSet)
     });
+    if (!response.ok) {
+        throw new Error('Failed to update flashcard set');
+    }
     return response.json();
 
 }
@@ -54,6 +68,9 @@ export async function createFlashcard(setId, card) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(card)
     });
+    if (!response.ok) {
+        throw new Error('Failed to create flashcard');
+    }
     return response.json();
 }
 
@@ -73,6 +90,9 @@ export async function updateFlashcard(setId, cardId, updatedCard) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(updatedCard)
     });
+    if (!response.ok) {
+        throw new Error('Failed to update flashcard');
+    }
     return response.json();
 }
 

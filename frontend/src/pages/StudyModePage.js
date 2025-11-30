@@ -37,7 +37,19 @@ export default function StudyModePage() {
     }
 
     if (!setData) return <div>Loading...</div>;
-    if (setData.flashcards.length === 0) return <div>No flashcards in this set.</div>;
+    if (!setData.flashcards || setData.flashcards.length === 0) {
+            return (
+                <div style={container}>
+                    <h1 className="page-title" style={{ textAlign: "center" }}>Study Mode</h1>
+                    <p style={{ textAlign: "center", marginTop: "50px" }}>
+                        This flashcard set doesn't have any cards yet.
+                    </p>
+                    <div style={{ textAlign: "center", marginTop: "30px" }}>
+                        <Link to={`/set/${id}`} className="btn">Back to Set</Link>
+                    </div>
+                </div>
+            );
+        }
 
     const total = setData.flashcards.length;
     const safeIndex = ((currentIndex % total) + total) % total;
@@ -93,6 +105,12 @@ export default function StudyModePage() {
     )
 
 }
+
+const container = {
+  maxWidth: "800px",
+  margin: "0 auto",
+  padding: "20px",
+};
 
 // Styles
 const containerStyle = {

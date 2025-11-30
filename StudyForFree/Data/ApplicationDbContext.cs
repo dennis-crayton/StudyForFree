@@ -26,6 +26,15 @@ namespace StudyForFree.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
 
+
+            //One to Many, ApplicationUser -> FlashcardSets
+            builder.Entity<FlashcardSet>()
+                .HasOne(fs => fs.User)
+                .WithMany(u => u.FlashcardSets)
+                .HasForeignKey(fs => fs.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<FlashcardSet>().HasIndex(x => x.UserId);
         }
     }
 }

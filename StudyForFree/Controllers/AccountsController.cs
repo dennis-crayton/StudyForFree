@@ -113,6 +113,7 @@ namespace StudyForFree.Controllers
                 List<Claim> authClaims = [
                     new (ClaimTypes.Name, user.UserName),
                     new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new (ClaimTypes.NameIdentifier,user.Id),
                     //unique id for token
                     ];
 

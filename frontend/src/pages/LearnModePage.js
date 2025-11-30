@@ -42,7 +42,9 @@ export default function LearnModePage() {
     async function loadSet() {
         const data = await getFlashcardSetById(id);
         setSetData(data);
-        generateQuestion(data.flashcards,0);
+        if (data.flashcards && data.flashcards.length > 0) {
+            generateQuestion(data.flashcards,0);
+        }
     }
 
     function shuffle(array) {
@@ -81,6 +83,20 @@ export default function LearnModePage() {
     }
 
     if (!setData) return <div>Loading...</div>;
+    
+    if (!setData.flashcards || setData.flashcards.length === 0) {
+        return (
+            <div style={container}>
+                <h1 className="page-title" style={{ textAlign: "center" }}>Learn Mode</h1>
+                <p style={{ textAlign: "center", marginTop: "50px" }}>
+                    This flashcard set doesn't have any cards yet.
+                </p>
+                <div style={{ textAlign: "center", marginTop: "30px" }}>
+                    <Link to={`/set/${id}`} className="btn">Back to Set</Link>
+                </div>
+            </div>
+        );
+    }
 
     const card = setData.flashcards[questionIndex];
 

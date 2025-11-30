@@ -18,6 +18,18 @@ export default function EditSetPage() {
         loadSet();
     },[id]);
 
+    useEffect(() => {
+      function handleKey(e) {
+          if (e.code === "Escape") {
+              navigate(-1);
+          }
+      }
+      window.addEventListener("keydown", handleKey);
+      return () => {
+          window.removeEventListener("keydown", handleKey);
+      };
+    }, [navigate]);
+
     async function loadSet() {
         const set = await getFlashcardSetById(id);
         setTitle(set.title);

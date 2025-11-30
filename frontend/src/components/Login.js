@@ -18,12 +18,10 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Username:", username, "Password:", password);
-
         try {
             login(username, password);
             const data = await login(username, password);
-            console.log("Login successful:", data);
+            console.log("Login successful");
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
 
@@ -64,7 +62,7 @@ function Login() {
                 <button type="submit">Login</button>
             </form>
             <p style={{justifyContent: "center", display: "flex", marginTop: "15px"}}>
-                Don't have an account? <Link to="/register" style={{marginLeft: "5px"}}>Register here</Link>
+                Don't have an account? <Link to="/signup" style={{marginLeft: "5px"}}>Register here</Link>
             </p>
         </div>
     );

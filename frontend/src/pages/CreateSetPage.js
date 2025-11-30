@@ -5,16 +5,24 @@ import {useNavigate} from 'react-router-dom';
 export default function CreateSetPage() {
     const[title, setTitle] = useState("");
     const[description, setDescription] = useState("");
+    const[error, setError] = useState("");
     const navigate = useNavigate();
 
     async function handleSubmit(event) {
         event.preventDefault();
-        await createFlashcardSet({title,description});
-        navigate("/");
+        try {
+            setError("");
+            await createFlashcardSet({title, description, isPublic: false});
+            navigate("/");
+        } catch (err) {
+            setError(`Failed to create set: User may not be logged in.`);
+            console.error("Create set error:", err);
+        }
     }
     return (
         <div style={pageContainer}>
             <h1 className="page-title">Create Flashcard Set</h1>
+            {error && <div style={errorStyle}>{error}</div>}
             <form onSubmit={handleSubmit} style={formStyle}>
                 <label style={labelStyle}>Title:</label>
                 <input 
@@ -88,4 +96,13 @@ const textareaStyle = {
   /* FIXES CURSOR POSITION */
   verticalAlign: "top",
   lineHeight: "1.4",
+};
+
+const errorStyle = {
+  backgroundColor: "#ff4444",
+  color: "white",
+  padding: "12px",
+  borderRadius: "8px",
+  marginBottom: "20px",
+  fontSize: "14px",
 };
