@@ -75,3 +75,30 @@ export async function updateFlashcard(setId, cardId, updatedCard) {
     });
     return response.json();
 }
+
+export async function login(username, password) {
+    const response = await fetch(`${API_BASE}/api/Accounts/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password}),
+    });
+    if (!response.ok) {
+        throw new Error('Login failed');
+    };
+    return response.json();
+}
+
+export async function register(name, email, password) {
+    const response = await fetch(`${API_BASE}/api/Accounts/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, password: password }),
+    });
+    if (!response.ok) {
+        throw new Error('Registration failed');
+    };
+    return response.json();
+}
+
+// need a way to make logout show when logged in
+

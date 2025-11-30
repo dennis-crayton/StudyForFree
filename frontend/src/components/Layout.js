@@ -1,8 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
 import { useSearch } from "../context/SearchContext";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Layout() {
     const { query, setQuery } = useSearch();
+    const { user, logout } = useContext(AuthContext);
   return (
     <div style={appContainer}>
       {/* NAVBAR */}
@@ -23,8 +26,20 @@ export default function Layout() {
         <div style={navLinks}>
           <Link to="/" style={navLink}>Home</Link>
           <Link to="/create-set" style={navLink}>Create</Link>
-          <Link to="/all-cards" style={navLink}>All Cards</Link>
           <Link to="/settings" style={navLink}>Settings</Link>
+          {user ? (
+            <>
+                <span style={{ ...navLink, cursor: "pointer" }} onClick={logout}>
+                    Logout
+                </span>
+            </>
+            ) : (
+                <>
+                    <Link to="/login" style={navLink}>Login</Link>
+                    <Link to="/signup" style={navLink}>Sign Up</Link>
+                </>
+            )}
+
         </div>
       </nav>
 
