@@ -78,13 +78,13 @@ export default function StudyModePage() {
                     {/* FRONT */}
                     <div style={{ ...flipFace }}>
                     <strong style={{ color: "#9bb6ff" }}>Q:</strong>
-                    <p>{card.question}</p>
+                    <p style={{ margin: "10px 0 0 0", width: "100%", wordWrap: "break-word", overflowWrap: "break-word" }}>{card.question}</p>
                     </div>
 
                     {/* BACK */}
                     <div style={flipBack}>
                     <strong style={{ color: "#a1ffa1" }}>A:</strong>
-                    <p>{card.answer}</p>
+                    <p style={{ margin: "10px 0 0 0", width: "100%", wordWrap: "break-word", overflowWrap: "break-word" }}>{card.answer}</p>
                     </div>
                 </div>
             </div>
@@ -110,6 +110,7 @@ const container = {
   maxWidth: "800px",
   margin: "0 auto",
   padding: "20px",
+
 };
 
 // Styles
@@ -125,6 +126,7 @@ const flipCardContainer = {
   perspective: "1800px",
   cursor: "pointer",
   marginBottom: "20px",
+  
 };
 
 const flipCard = {
@@ -150,6 +152,7 @@ const flipFace = {
   padding: "20px",
   textAlign: "center",
   fontSize: "18px",
+  
 };
 const flipFront = {
   position: "absolute",

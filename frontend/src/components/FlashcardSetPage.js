@@ -70,7 +70,7 @@ export default function FlashcardSetPage() {
 
 
     return (
-    <div>
+    <div className="container">
       <div className="title-row">
         <h1 className="page-title">{setData.title}</h1>
         <div>

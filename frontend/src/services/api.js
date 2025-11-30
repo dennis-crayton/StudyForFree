@@ -1,12 +1,28 @@
 const API_BASE = "";
 
 export async function getFlashcardSets() {
-    const token = localStorage.getItem('accessToken');
-    const response = await fetch(`${API_BASE}/api/FlashcardSet`, {
+    let token = localStorage.getItem('accessToken');
+    let response = await fetch(`${API_BASE}/api/FlashcardSet`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
     });
+    
+    // If unauthorized, try to refresh token and retry
+    if (response.status === 401) {
+        try {
+            token = await refreshToken();
+            response = await fetch(`${API_BASE}/api/FlashcardSet`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+        } catch (error) {
+            window.location.href = '/login';
+            throw error;
+        }
+    }
+    
     if (!response.ok) {
         throw new Error('Failed to fetch flashcard sets');
     }
@@ -21,8 +37,8 @@ export async function getFlashcardSetById(id) {
 }
 
 export async function createFlashcardSet(set) {
-    const token = localStorage.getItem('accessToken');
-    const response = await fetch(`${API_BASE}/api/FlashcardSet`,{
+    let token = localStorage.getItem('accessToken');
+    let response = await fetch(`${API_BASE}/api/FlashcardSet`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -30,11 +46,29 @@ export async function createFlashcardSet(set) {
         },
         body: JSON.stringify(set)
     });
+    
+    // If unauthorized, try to refresh token and retry
+    if (response.status === 401) {
+        try {
+            token = await refreshToken();
+            response = await fetch(`${API_BASE}/api/FlashcardSet`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(set)
+            });
+        } catch (error) {
+            window.location.href = '/login';
+            throw error;
+        }
+    }
+    
     if (!response.ok) {
         throw new Error('Failed to create flashcard set');
     }
     return response.json();
-
 }
 
 export async function updateFlashcardSet(id,updatedSet) {
@@ -120,5 +154,35 @@ export async function register(name, email, password) {
     return response.json();
 }
 
-// need a way to make logout show when logged in
+// Refresh token function using your existing backend endpoint
+export async function refreshToken() {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    
+    if (!refreshToken) {
+        throw new Error('No refresh token available');
+    }
+    
+    const response = await fetch(`${API_BASE}/api/Accounts/token/refresh`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            accessToken: accessToken,
+            refreshToken: refreshToken 
+        }),
+    });
+    
+    if (!response.ok) {
+        // Refresh token expired, clear storage
+        localStorage.removeItem('user');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        throw new Error('Session expired, please login again');
+    }
+    
+    const data = await response.json();
+    localStorage.setItem('accessToken', data.accessToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
+    return data.accessToken;
+}
 

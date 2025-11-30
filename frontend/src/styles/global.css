@@ -80,7 +80,7 @@ body {
 }
 
 .page-container {
-  max-width: var(--container-sm);
+  max-width: var(--container-md);
   margin: var(--spacing-huge) auto;
   padding: 0 var(--spacing-xl);
 }
@@ -90,7 +90,6 @@ body {
   background-color: var(--color-card-bg);
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
-  margin-bottom: var(--spacing-md);
   border: 1px solid var(--color-border-light);
   transition: 0.2s ease;
 }
@@ -150,7 +149,6 @@ body {
   color: var(--color-text-primary);
   padding: var(--spacing-lg);
   border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-xl);
   font-size: var(--font-size-sm);
 }
 
@@ -182,21 +180,6 @@ button:hover, .btn:hover {
   text-decoration: none;
 }
 
-.btn-small {
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-sm);
-  height: 35px;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border-primary);
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-border-light);
-}
 
 /* Links */
 a {
@@ -224,6 +207,10 @@ a:hover {
   border-radius: var(--radius-md);
   margin-bottom: var(--spacing-lg);
   border: 1px solid var(--color-border-light);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* FlashcardSetPage specific styles */
@@ -231,7 +218,6 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-md);
 }
 
 .description-style {
@@ -247,13 +233,13 @@ a:hover {
 
 .edit-input-style {
   width: 100%;
-  padding: var(--spacing-md);
-  margin-top: var(--spacing-md);
-  border-radius: var(--radius-sm);
-  border: 1px solid #444;
-  background-color: #12141c;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-primary);
+  background-color: var(--color-secondary-bg);
   color: var(--color-text-primary);
   font-size: var(--font-size-md);
+  font-family: var(--font-family);
   box-sizing: border-box;
 }
 
@@ -262,17 +248,22 @@ a:hover {
   border-color: var(--color-accent);
 }
 
+.question-label,
+.answer-label {
+  font-weight: var(--font-weight-semibold);
+}
+
 .question-label {
   color: var(--color-question);
-  font-weight: var(--font-weight-semibold);
 }
 
 .answer-label {
   color: var(--color-answer);
-  font-weight: var(--font-weight-semibold);
 }
 
-.question-section {
+.question-section,
+.card,
+.title-row {
   margin-bottom: var(--spacing-md);
 }
 
@@ -300,7 +291,8 @@ a:hover {
   margin-right: var(--spacing-md);
 }
 
-.add-card-form {
+.add-card-form,
+.error-style {
   margin-bottom: var(--spacing-xl);
 }
 
@@ -308,7 +300,8 @@ a:hover {
   margin-top: var(--spacing-xxxl);
 }
 
-.add-button {
+.add-button,
+.edit-input-style {
   margin-top: var(--spacing-md);
 }
 

@@ -165,12 +165,20 @@ const questionText = {
   fontSize: "18px",
   textAlign: "center",
   marginBottom: "20px",
+  wordWrap: "break-word",
+  overflowWrap: "break-word",
+  maxWidth: "100%",
+  boxSizing: "border-box",
 };
 
 const choicesContainer = {
   display: "flex",
   flexDirection: "column",
   gap: "12px",
+  wordWrap: "break-word",
+  overflowWrap: "break-word",
+  maxWidth: "100%",
+  boxSizing: "border-box",
 };
 
 const choiceButton = {
