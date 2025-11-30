@@ -71,33 +71,33 @@ export default function FlashcardSetPage() {
 
     return (
     <div>
-      <div style={titleRow}>
+      <div className="title-row">
         <h1 className="page-title">{setData.title}</h1>
         <div>
-          <Link className="btn" to={`/study/${setData.id}`} style={{ marginRight: "10px" }}>
+          <Link className="btn btn-with-margin" to={`/study/${setData.id}`}>
             Study Mode
           </Link>
-          <Link className="btn" to={`/learn/${setData.id}`} style={{ marginRight: "10px" }}>
+          <Link className="btn btn-with-margin" to={`/learn/${setData.id}`}>
             Learn Mode
           </Link>
-          <Link className="btn" to={`/edit-set/${setData.id}`} style={{ marginRight: "10px" }}>
+          <Link className="btn btn-with-margin" to={`/edit-set/${setData.id}`}>
             Edit Set
           </Link>
           <Link className="btn" to="/">Back</Link>
         </div>
       </div>
 
-      <p style={descriptionStyle}>{setData.description}</p>
+      <p className="description-style">{setData.description}</p>
 
-        <h3 style={{ marginTop: "30px" }}>Add Flashcard</h3>
+        <h3 className="add-card-header">Add Flashcard</h3>
 
-            <form onSubmit={handleAddFlashcard} style={{ marginBottom: "25px" }}>
+            <form onSubmit={handleAddFlashcard} className="add-card-form">
                 <input
                     type="text"
                     placeholder="Question"
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
-                    style={editInputStyle}
+                    className="edit-input-style"
                 />
 
                 <input
@@ -105,12 +105,12 @@ export default function FlashcardSetPage() {
                     placeholder="Answer"
                     value={answer}
                     onChange={(e) => setAnswer(e.target.value)}
-                    style={editInputStyle}
+                    className="edit-input-style"
                 />
-                <button style={{marginTop:"10px"}} className="btn" type="submit">Add</button>
+                <button className="btn add-button" type="submit">Add</button>
             </form>        
 
-            <h3 style={flashcardsHeader}>Flashcards</h3>
+            <h3 className="flashcards-header">Flashcards</h3>
 
              {setData.flashcards.length === 0 ? (
                 <p>No flashcards in this set yet.</p>
@@ -120,36 +120,34 @@ export default function FlashcardSetPage() {
 
                         {editingCardId === card.id ? (
                             <>
-                            <div style={{marginBottom: "15px"}}>
-                                <strong style={{color:"#9bb6ff"}}>Q:</strong>
+                            <div className="question-section">
+                                <strong className="question-label">Q:</strong>
                                 <input
                                     type="text"
                                     value={editQuestion}
                                     onChange={(e) => setEditQuestion(e.target.value)}
-                                    style={editInputStyle}
+                                    className="edit-input-style"
                                 />
 
                             </div>
-                             <div style={{ marginBottom: "8px" }}>
-                                <strong style={{ color: "#a1ffa1" }}>A:</strong>
+                             <div className="answer-section">
+                                <strong className="answer-label">A:</strong>
                                 <input
                                 type="text"
                                 value={editAnswer}
                                 onChange={(e) => setEditAnswer(e.target.value)}
-                                style={editInputStyle}
+                                className="edit-input-style"
                                 />
                             </div>
 
                             <button 
-                                className="btn" 
-                                style={{marginRight: "10px"}} 
+                                className="btn btn-with-margin" 
                                 onClick={() => handleSaveEdit(card.id)}
                                 >
                                 Save
                             </button>
                             <button
-                                className="btn"
-                                style={{backgroundColor:"#444"}}
+                                className="btn btn-cancel"
                                 onClick={cancelEdit}
                                 >
                                 Cancel
@@ -158,19 +156,18 @@ export default function FlashcardSetPage() {
                         ) : (
                             <>
                         {/* Question */}
-                        <div style={{ marginBottom: "15px" }}>
-                            <strong style={{ color: "#9bb6ff" }}>Q:</strong> {card.question}
+                        <div className="question-section">
+                            <strong className="question-label">Q:</strong> {card.question}
                         </div>
 
                         {/* Answer */}
-                        <div style={{ marginBottom: "8px" }}>
-                            <strong style={{ color: "#a1ffa1" }}>A:</strong> {card.answer}
+                        <div className="answer-section">
+                            <strong className="answer-label">A:</strong> {card.answer}
                         </div>
 
                         {/* Edit Button */}
                         <button
-                            className="btn"
-                            style={{ marginRight: "10px" }}
+                            className="btn btn-with-margin"
                             onClick={() => startEditing(card)}
                         >
                             Edit
@@ -178,8 +175,7 @@ export default function FlashcardSetPage() {
 
                         {/* Delete */}
                         <button
-                            className="btn"
-                            style={{ backgroundColor: "#552222" }}
+                            className="btn btn-delete"
                             onClick={() => handleDeleteFlashcard(card.id)}
                         >
                             Delete
@@ -193,40 +189,3 @@ export default function FlashcardSetPage() {
     );
 }
 
-const titleRow = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "15px",
-};
-
-const descriptionStyle = {
-  opacity: 0.85,
-  marginBottom: "25px",
-  fontSize: "16px",
-};
-
-const flashcardsHeader = {
-  marginTop: "25px",
-  marginBottom: "15px",
-};
-const inputStyle = {
-    padding: "8px",
-    marginRight: "10px",
-    borderRadius: "6px",
-    border: "1px solid #444",
-    backgroundColor: "#1b1d29",
-    color: "white",
-};
-
-const editInputStyle = {
-  width: "100%",
-  padding: "10px",
-  marginTop: "10px",
-  borderRadius: "6px",
-  border: "1px solid #444",
-  backgroundColor: "#12141c",
-  color: "white",
-  fontSize: "15px",
-  boxSizing: "border-box",
-};

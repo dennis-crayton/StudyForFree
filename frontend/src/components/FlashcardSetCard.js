@@ -10,7 +10,7 @@ export default function FlashcardSetCard({ set }) {
         window.location.reload();
     }
     return (
-        <div className="flashcardSet">
+        <div className="page-container" style={{border: '1px solid #ccc', padding: '15px', marginBottom: '10px', borderRadius: '5px'}}>
             <h3>
                 {set.title}            
                 <Link to={`/set/${set.id}`} style={{marginLeft: '10px', fontSize: '18px'}}>View</Link>

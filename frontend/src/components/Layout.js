@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useSearch } from "../context/SearchContext";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -8,6 +8,7 @@ export default function Layout() {
     const { query, setQuery } = useSearch();
     const { user, logout } = useContext(AuthContext);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     // Close mobile menu when window is resized to desktop size
     useEffect(() => {
@@ -24,6 +25,11 @@ export default function Layout() {
             window.removeEventListener('resize', handleResize);
         };
     }, [mobileMenuOpen]);
+
+    const handleLogout = () => {
+        logout();
+        window.location.href = '/';
+    };
 
   return (
     <div style={appContainer}>
@@ -58,7 +64,7 @@ export default function Layout() {
           <Link to="/settings" style={navLink}>Settings</Link>
           {user ? (
             <>
-                <span style={{ ...navLink, cursor: "pointer" }} onClick={logout}>
+                <span style={{ ...navLink, cursor: "pointer" }} onClick={handleLogout}>
                     Logout
                 </span>
             </>
@@ -91,7 +97,7 @@ export default function Layout() {
             <Link to="/create-set" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Create</Link>
             <Link to="/settings" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Settings</Link>
             {user ? (
-              <span className="mobile-nav-link" style={{ cursor: "pointer" }} onClick={() => { logout(); setMobileMenuOpen(false); }}>
+              <span className="mobile-nav-link" style={{ cursor: "pointer" }} onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>
                   Logout
               </span>
             ) : (

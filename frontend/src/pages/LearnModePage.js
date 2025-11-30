@@ -101,7 +101,7 @@ export default function LearnModePage() {
     const card = setData.flashcards[questionIndex];
 
     return (
-        <div style={container}>
+        <div className="page-container" >
             <h1 className="page-title" style={{ textAlign: "center" }}>
                 Learn Mode
             </h1>

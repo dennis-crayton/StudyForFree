@@ -20,24 +20,24 @@ export default function CreateSetPage() {
         }
     }
     return (
-        <div style={pageContainer}>
+        <div className="page-container">
             <h1 className="page-title">Create Flashcard Set</h1>
-            {error && <div style={errorStyle}>{error}</div>}
-            <form onSubmit={handleSubmit} style={formStyle}>
-                <label style={labelStyle}>Title:</label>
+            {error && <div className="error-style">{error}</div>}
+            <form onSubmit={handleSubmit} className="form-style">
+                <label className="label-style">Title:</label>
                 <input 
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    style={inputStyle}
+                    className="input-style"
                 />
                 <br />
-                <label style={labelStyle}>Description:</label>
+                <label className="label-style">Description:</label>
                 <textarea
                     type="text"
                     value={description}
                     onChange={(e)=> setDescription(e.target.value)}
-                    style={textareaStyle}
+                    className="textarea-style"
                 />
                 <br />
                 <button className="btn" type="submit" style={{ height:"35px"}}>Save Changes</button>
@@ -47,62 +47,3 @@ export default function CreateSetPage() {
     )
 }
 
-const pageContainer = {
-  maxWidth: "520px",
-  margin: "40px auto",
-  padding: "0 20px",
-};
-
-const formStyle = {
-  display: "flex",
-  flexDirection: "column",
-  backgroundColor: "#161822",
-  padding: "25px",
-  borderRadius: "12px",
-  border: "1px solid rgba(255,255,255,0.08)",
-  gap: "18px", // consistent modern spacing
-};
-
-
-const labelStyle = {
-  fontSize: "14px",
-  fontWeight: "500",
-  color: "#d0d5e0",
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  borderRadius: "8px",
-  border: "1px solid #3a3f5c",
-  backgroundColor: "#0e1018",
-  color: "white",
-  fontSize: "15px",
-  boxSizing: "border-box",
-};
-
-const textareaStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  height: "120px",
-  borderRadius: "8px",
-  border: "1px solid #3a3f5c",
-  backgroundColor: "#0e1018",
-  color: "white",
-  fontSize: "15px",
-  resize: "vertical",
-  boxSizing: "border-box",
-
-  /* FIXES CURSOR POSITION */
-  verticalAlign: "top",
-  lineHeight: "1.4",
-};
-
-const errorStyle = {
-  backgroundColor: "#ff4444",
-  color: "white",
-  padding: "12px",
-  borderRadius: "8px",
-  marginBottom: "20px",
-  fontSize: "14px",
-};

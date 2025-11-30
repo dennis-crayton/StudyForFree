@@ -1,48 +1,201 @@
+/* CSS Custom Properties (Variables) */
+:root {
+  /* Colors */
+  --color-primary-bg: #161822;
+  --color-secondary-bg: #0e1018;
+  --color-app-bg: #0e1018;
+  --color-card-bg: #161925;
+  --color-card-hover: #1e2130;
+  
+  --color-text-primary: white;
+  --color-text-secondary: rgba(255,255,255,0.85);
+  --color-text-muted: rgba(255,255,255,0.7);
+  
+  --color-border-primary: #3a3f5c;
+  --color-border-light: rgba(255,255,255,0.08);
+  
+  --color-accent: #72a7ff;
+  --color-success: #4caf50;
+  --color-error: #ff4444;
+  --color-question: #9bb6ff;
+  --color-answer: #a1ffa1;
+  
+  /* Button colors */
+  --color-button-bg: #343853;
+  --color-button-hover: #4a4f70;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-xxl: 24px;
+  --spacing-xxxl: 30px;
+  --spacing-huge: 40px;
+  
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 15px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-xxl: 20px;
+  --font-size-title: 28px;
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Container widths */
+  --container-sm: 520px;
+  --container-md: 900px;
+}
+
 * {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-family: var(--font-family);
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #0d0f18;
-    color: #e5e5e5;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue";
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-app-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
 }
 
+/* Layout - only what you actually use */
 .container {
-    max-width:900px;
-    margin: auto;
-    padding: 20px;
+  max-width: var(--container-md);
+  margin: auto;
+  padding: var(--spacing-xl);
 }
 
-.card {
-    background-color: #161925;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    border: 1px solid rgba(255,255,255, 0.05);
-    transition: 0.2s ease;
+.page-container {
+  max-width: var(--container-sm);
+  margin: var(--spacing-huge) auto;
+  padding: 0 var(--spacing-xl);
 }
+
+/* Cards - keeping existing card style */
+.card {
+  background-color: var(--color-card-bg);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+  border: 1px solid var(--color-border-light);
+  transition: 0.2s ease;
+}
+
 .card:hover {
-  background-color: #1e2130;
+  background-color: var(--color-card-hover);
   transform: translateY(-2px);
+}
+
+/* Form styles - replacing your inline styles */
+.form-style {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primary-bg);
+  padding: var(--spacing-xxl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+  gap: var(--spacing-lg);
+}
+
+.label-style {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.input-style {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-primary);
+  background-color: var(--color-secondary-bg);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+.textarea-style {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  height: 120px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-primary);
+  background-color: var(--color-secondary-bg);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  font-family: var(--font-family);
+  resize: vertical;
+  box-sizing: border-box;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.error-style {
+  background-color: var(--color-error);
+  color: var(--color-text-primary);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-sm);
+}
+
+.input-style:focus,
+.textarea-style:focus {
+  outline: none;
+  border-color: var(--color-accent);
 }
 
 /* Buttons */
 button, .btn {
-  background-color: #343853;
-  color: white;
-  padding: 8px 14px;
+  background-color: var(--color-button-bg);
+  color: var(--color-text-primary);
+  padding: var(--spacing-md) var(--spacing-xl);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family);
   cursor: pointer;
   transition: 0.2s ease;
-  
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
 
 button:hover, .btn:hover {
-  background-color: #4a4f70;
+  background-color: var(--color-button-hover);
+  text-decoration: none;
+}
+
+.btn-small {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  height: 35px;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-border-light);
 }
 
 /* Links */
@@ -56,19 +209,122 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Page titles */
+/* Page titles - keeping existing */
 .page-title {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xl);
+  color: var(--color-text-primary);
 }
 
-/* Flashcards */
+/* Flashcards - keeping existing */
 .flashcard {
-  background-color: #1a1d2b;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+  background-color: var(--color-primary-bg);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-lg);
+  border: 1px solid var(--color-border-light);
+}
 
+/* FlashcardSetPage specific styles */
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.description-style {
+  opacity: 0.85;
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-lg);
+}
+
+.flashcards-header {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.edit-input-style {
+  width: 100%;
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid #444;
+  background-color: #12141c;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  box-sizing: border-box;
+}
+
+.edit-input-style:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.question-label {
+  color: var(--color-question);
+  font-weight: var(--font-weight-semibold);
+}
+
+.answer-label {
+  color: var(--color-answer);
+  font-weight: var(--font-weight-semibold);
+}
+
+.question-section {
+  margin-bottom: var(--spacing-md);
+}
+
+.answer-section {
+  margin-bottom: var(--spacing-sm);
+}
+
+.btn-delete {
+  background-color: #552222;
+}
+
+.btn-delete:hover {
+  background-color: #663333;
+}
+
+.btn-cancel {
+  background-color: #444;
+}
+
+.btn-cancel:hover {
+  background-color: #555;
+}
+
+.btn-with-margin {
+  margin-right: var(--spacing-md);
+}
+
+.add-card-form {
+  margin-bottom: var(--spacing-xl);
+}
+
+.add-card-header {
+  margin-top: var(--spacing-xxxl);
+}
+
+.add-button {
+  margin-top: var(--spacing-md);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-container {
+    margin: var(--spacing-xl) auto;
+    padding: 0 var(--spacing-md);
+  }
+  
+  .container {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+  
+  .form-style {
+    padding: var(--spacing-lg);
+  }
 }
 

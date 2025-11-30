@@ -48,21 +48,21 @@ export default function EditSetPage() {
     }
 
     return (
-        <div style={pageContainer}>
+        <div className ="page-container">
             <h1 className="page-title">Edit FlashcardSet</h1>
-            <form onSubmit={handleSubmit} style={formStyle}>
-                <label style={labelStyle}>Title:</label>
+            <form onSubmit={handleSubmit} className="form-style">
+                <label className="label-style">Title:</label>
                 <input 
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    style={inputStyle}
+                    className="input-style"
                 />
                 <br />
-                <label style={labelStyle}>Description:</label>
+                <label className="label-style">Description:</label>
                 <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    style={textareaStyle}
+                    className="textarea-style"
                 />
                 <br />
                 <button className="btn" type="submit" style={{ height:"35px"}}>Save Changes</button>
@@ -71,56 +71,3 @@ export default function EditSetPage() {
         </div>
     )
 }
-
-
-const pageContainer = {
-  maxWidth: "520px",
-  margin: "40px auto",
-  padding: "0 20px",
-};
-
-const formStyle = {
-  display: "flex",
-  flexDirection: "column",
-  backgroundColor: "#161822",
-  padding: "25px",
-  borderRadius: "12px",
-  border: "1px solid rgba(255,255,255,0.08)",
-  gap: "18px", // consistent modern spacing
-};
-
-
-const labelStyle = {
-  fontSize: "14px",
-  fontWeight: "500",
-  color: "#d0d5e0",
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  borderRadius: "8px",
-  border: "1px solid #3a3f5c",
-  backgroundColor: "#0e1018",
-  color: "white",
-  fontSize: "15px",
-  boxSizing: "border-box",
-};
-
-const textareaStyle = {
-  width: "100%",
-  padding: "10px 12px",
-  height: "120px",
-  borderRadius: "8px",
-  border: "1px solid #3a3f5c",
-  backgroundColor: "#0e1018",
-  color: "white",
-  fontSize: "15px",
-  resize: "vertical",
-  boxSizing: "border-box",
-
-  /* FIXES CURSOR POSITION */
-  verticalAlign: "top",
-  lineHeight: "1.4",
-};
-
